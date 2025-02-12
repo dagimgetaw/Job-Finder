@@ -2,7 +2,7 @@ import logo from "../../assets/job_logo.png";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-between fixed w-full items-center py-5 px-24 border-b-4 border-gray-300">
+    <nav className="flex justify-between items-center py-5 px-24 bg-white fixed w-full backdrop-blur-sm bg-opacity-50 z-10 border-b-2 border-gray-200 shadow-md">
       <div className="bg-[#0034D1] border-[#0034D1] rounded-lg cursor-pointer">
         <img src={logo} alt="logo image" className="w-30 h-12" />
       </div>
