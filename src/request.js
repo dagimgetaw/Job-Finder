@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useFetchJobs(page, limit) {
+export function useFetchJobs(page, limit) {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -16,6 +16,7 @@ export default function useFetchJobs(page, limit) {
         if (!response.ok) throw new Error("Failed to fetch jobs");
         const result = await response.json();
         setJobs(result.jobs || []);
+        console.log(result);
       } catch (error) {
         setError(error);
       } finally {
@@ -27,4 +28,19 @@ export default function useFetchJobs(page, limit) {
   }, [page, limit]);
 
   return { jobs, loading, error };
+}
+
+export function useBookMark() {
+  const [bookmarkedJobs, setBookmarkedJobs] = useState([]);
+
+  const handleBookMark = (jobId) => {
+    setBookmarkedJobs((prev) => {
+      const updatedBookmarks = prev.includes(jobId)
+        ? prev.filter((id) => id !== jobId)
+        : [jobId, ...prev];
+      return updatedBookmarks.reverse();
+    });
+  };
+
+  return { bookmarkedJobs, handleBookMark };
 }
